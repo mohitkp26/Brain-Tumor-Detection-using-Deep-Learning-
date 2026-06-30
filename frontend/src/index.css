@@ -1,0 +1,307 @@
+:root {
+  --bg: #0a0e14;
+  --panel: #11161f;
+  --line: #232b38;
+  --ink: #e7ecf3;
+  --ink-dim: #8b97a8;
+  --teal: #34e2c4;
+  --amber: #f0a857;
+  --rose: #ef6f8e;
+  --violet: #9b87f5;
+  --mono: "IBM Plex Mono", monospace;
+  --display: "Space Grotesk", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--display);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark {
+  width: 10px; height: 10px;
+  background: var(--teal);
+  box-shadow: 0 0 12px var(--teal);
+  border-radius: 2px;
+}
+.brand-name {
+  font-family: var(--mono);
+  letter-spacing: 0.12em;
+  font-size: 14px;
+  font-weight: 500;
+}
+.topbar-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+  letter-spacing: 0.08em;
+}
+
+.layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  padding: 56px 32px;
+  max-width: 1180px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--teal);
+  margin: 0 0 14px;
+}
+
+.intro h1 {
+  font-size: 40px;
+  line-height: 1.12;
+  margin: 0 0 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.intro-copy {
+  color: var(--ink-dim);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 40ch;
+  margin: 0 0 28px;
+}
+
+.legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ink-dim);
+}
+.legend li { display: flex; align-items: center; gap: 10px; }
+.dot {
+  width: 8px; height: 8px; border-radius: 50%; display: inline-block;
+}
+.dot-glioma { background: var(--rose); }
+.dot-meningioma { background: var(--violet); }
+.dot-pituitary { background: var(--amber); }
+.dot-none { background: var(--teal); }
+
+.scan-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.dropzone {
+  border: 1px dashed var(--line);
+  border-radius: 4px;
+  background: var(--panel);
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.dropzone:hover { border-color: var(--teal); }
+.dropzone.has-image { cursor: default; padding: 0; }
+
+.dropzone-placeholder {
+  text-align: center;
+  color: var(--ink-dim);
+}
+.dropzone-icon {
+  display: block;
+  font-size: 28px;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+.dropzone-hint {
+  font-family: var(--mono);
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.image-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.image-wrap img {
+  width: 100%;
+  height: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  display: block;
+  background: #000;
+}
+
+.sweep {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(
+    180deg,
+    rgba(52, 226, 196, 0) 0%,
+    rgba(52, 226, 196, 0.28) 50%,
+    rgba(52, 226, 196, 0) 100%
+  );
+  animation: sweep-move 1.6s ease-in-out infinite;
+}
+@keyframes sweep-move {
+  0% { transform: translateY(-40%); }
+  100% { transform: translateY(250%); }
+}
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(52, 226, 196, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(52, 226, 196, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+}
+.btn-primary, .btn-ghost {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  padding: 12px 22px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.btn-primary {
+  background: var(--teal);
+  color: #06251f;
+  font-weight: 500;
+  border: none;
+}
+.btn-primary:disabled { opacity: 0.35; cursor: not-allowed; }
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-dim);
+  border-color: var(--line);
+}
+.btn-ghost:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.error-box {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--rose);
+  border: 1px solid var(--rose);
+  background: rgba(239, 111, 142, 0.08);
+  padding: 12px 14px;
+  border-radius: 3px;
+}
+
+.result-box {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.result-headline {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+.result-class {
+  font-size: 22px;
+  font-weight: 600;
+}
+.result-no_tumor { color: var(--teal); }
+.result-glioma { color: var(--rose); }
+.result-meningioma { color: var(--violet); }
+.result-pituitary { color: var(--amber); }
+
+.result-confidence {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-dim);
+}
+
+.prob-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.prob-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 48px;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.prob-label { color: var(--ink-dim); }
+.prob-track {
+  height: 6px;
+  background: var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.prob-fill { height: 100%; border-radius: 3px; }
+.prob-fill-glioma { background: var(--rose); }
+.prob-fill-meningioma { background: var(--violet); }
+.prob-fill-pituitary { background: var(--amber); }
+.prob-fill-no_tumor { background: var(--teal); }
+.prob-value { text-align: right; color: var(--ink-dim); }
+
+.disclaimer {
+  font-size: 11.5px;
+  color: var(--ink-dim);
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 32px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+}
+
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; }
+  .intro h1 { font-size: 30px; }
+}
